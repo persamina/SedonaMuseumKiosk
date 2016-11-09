@@ -10,70 +10,78 @@
   <meta name="author" content="ElectricLife Engineering">
 
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/ekko-lightbox.min.css">
+  <link rel="stylesheet" href="theme/classic/galleria.classic.css">
+  <link rel="stylesheet" href="css/sedonamuseumkiosk.css">
+  <style>
+      .galleria-thumbnails-container{ height: 0px;
+  </style>
 
   <!-- All needed for bootstrap -->
   <script src="js/tether.min.js"></script>
-  <script src="js/jquery-3.1.1.min.js"></script>
+  <!--<script src="js/jquery-3.1.1.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
   <script src="js/bootstrap.min.js"></script>
-  <script src="js/ekko-lightbox.min.js"></script>
+  <script src="js/galleria-1.4.7.min.js"></script>
+  <script>
+    $(window).on('load', function() {
+      console.log("loaded!");
+      Galleria.loadTheme('theme/classic/galleria.classic.min.js');
+      Galleria.configure({
+              thumbnails: false
+              });
+      Galleria.run('.galleria', {
+        height: .6666,
+        extend: function(options) {
+          thumbnails: false,
+          this.bind('image', function(e) {
+            $(e.imageTarget).click(this.proxy(function() {
+              this.enterFullscreen();
+            }));
+          });
+        }
+});
+});
+
+  </script>
+
 
 </head>
 
 <body>
   <div class="container">
     <div class="row">
-      <div class="col-sm-3">
+      <div class="col-sm-2">
       </div>
-      <div class="col-sm-6">
-        <a href="./img/1.JPG" data-toggle="lightbox" 
-          data-gallery="gallery1" data-title="Img 1">
-          <img src="./img/1.JPG" width="400" data-title"Img 1">
-        </a>
-        <!-- elements not showing, use data-remote -->
-        <div data-toggle="lightbox" data-gallery="gallery1" 
-          data-remote="./img/2.JPG" data-title="Img 2"></div>
-        <div data-toggle="lightbox" data-gallery="gallery1" 
-          data-remote="./img/3.JPG" data-title="Img 3"></div>
+      <div class="col-sm-8">
+        <div class="galleria" width="760" height="428">
+          <img src="img/1.JPG" data-title="My title" data-description="my description">
+          <img src="img/2.JPG" data-title="My title" data-description="my description">
+          <img src="img/3.JPG" data-title="My title" data-description="my description">
+        </div>
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-2">
       </div>
     </div>
+    <br>
     <div class="row">
-      <div class="col-sm-4">
-        <a href="./img/4.JPG" data-toggle="lightbox" 
-          data-gallery="gallery2" data-title="Img 4">
-          <img src="./img/4.JPG" width="300" data-title"Img 4">
-        </a>
-        <!-- elements not showing, use data-remote -->
-        <div data-toggle="lightbox" data-gallery="gallery2" 
-          data-remote="./img/5.JPG" data-title="Img 5"></div>
-        <div data-toggle="lightbox" data-gallery="gallery2" 
-          data-remote="./img/6.JPG" data-title="Img 6"></div>
+      <div class="col-sm-4" width="380" height="214">
+        <div class="galleria">
+          <img src="img/4.JPG" data-title="My title" data-description="my description">
+          <img src="img/5.JPG" data-title="My title" data-description="my description">
+          <img src="img/6.JPG" data-title="My title" data-description="my description">
+        </div>
+      </div>
+      <div class="col-sm-4" width="380" height="214">
+        <div class="galleria">
+          <img src="img/7.JPG" data-title="My title" data-description="my description">
+          <img src="img/8.JPG" data-title="My title" data-description="my description">
+          <img src="img/9.JPG" data-title="My title" data-description="my description">
+        </div>
       </div>
       <div class="col-sm-4">
-        <a href="./img/7.JPG" data-toggle="lightbox" 
-          data-gallery="gallery3" data-title="Img 7">
-          <img src="./img/7.JPG" width="300" data-title"Img 7">
-        </a>
-        <!-- elements not showing, use data-remote -->
-        <div data-toggle="lightbox" data-gallery="gallery3" 
-          data-remote="./img/8.JPG" data-title="Img 8"></div>
-        <div data-toggle="lightbox" data-gallery="gallery3" 
-          data-remote="./img/9.JPG" data-title="Img 9"></div>
-      </div>
-      <div class="col-sm-4">
-        <h2>Calendar</h2>
       </div>
     </div>
   </div>
-  <script>
-  $(document).on('click', '[data-toggle="lightbox"]', function(event) {
-    event.preventDefault();
-    $(this).ekkoLightbox();
-  });
-  </script>
-
 </body>
 
 </html>
