@@ -5,13 +5,15 @@
 <head>
   <meta charset="utf-8">
 
-  <title>The HTML5 Herald</title>
+  <title>The HTML5 Herad</title>
   <meta name="description" content="Sedona Museum Kiosk">
   <meta name="author" content="ElectricLife Engineering">
 
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="theme/classic/galleria.classic.css">
+  <link rel="stylesheet" href="css/lightgallery.css">
+  <link rel="stylesheet" href="css/lg-transitions.css">
   <link rel="stylesheet" href="css/sedonamuseumkiosk.css">
+
   <style>
       .galleria-thumbnails-container{ height: 0px;
   </style>
@@ -21,26 +23,36 @@
   <!--<script src="js/jquery-3.1.1.min.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
   <script src="js/bootstrap.min.js"></script>
-  <script src="js/galleria-1.4.7.min.js"></script>
+  <script src="js/lightgallery-all.min.js"></script>
+  <script src="js/lg-thumbnail.js"></script>
+  <script src="js/lg-video.min.js"></script>
+
   <script>
-    $(window).on('load', function() {
-      console.log("loaded!");
-      Galleria.loadTheme('theme/classic/galleria.classic.min.js');
-      Galleria.configure({
-              thumbnails: false
-              });
-      Galleria.run('.galleria', {
-        height: .6666,
-        extend: function(options) {
-          thumbnails: false,
-          this.bind('image', function(e) {
-            $(e.imageTarget).click(this.proxy(function() {
-              this.enterFullscreen();
-            }));
-          });
-        }
-});
-});
+    $(document).ready(function() {
+      var imgPerRow = 4;
+      var galleryWidth = $("#lightgallery1").width();
+      var photoWidth = (galleryWidth / imgPerRow) - 5;
+      $("#lightgallery1 img.thumbnail").css("width", photoWidth);
+      $("#lightgallery1 img.thumbnail").css("height", photoWidth*2/3);
+      $("#lightgallery1").lightGallery({
+        thumbnail: true,
+        thumbnailWidth: photoWidth,
+        loadYoutubeThumbnail: true
+      });
+
+      imgPerRow = 2;
+      galleryWidth = $("#lightgallery2").width();
+      photoWidth = (galleryWidth / imgPerRow) - 5;
+      $("#lightgallery2 img.thumbnail").css("width", photoWidth);
+      $("#lightgallery2 img.thumbnail").css("height", photoWidth*2/3);
+      $("#lightgallery2").lightGallery({
+        thumbnail: true 
+      });
+      $('#video-thumbnails').lightGallery({
+        loadYoutubeThumbnail: true,
+        youtubeThumbSize: 200
+      });
+    });
 
   </script>
 
@@ -53,10 +65,34 @@
       <div class="col-sm-2">
       </div>
       <div class="col-sm-8">
-        <div class="galleria" width="760" height="428">
-          <img src="img/1.JPG" data-title="My title" data-description="my description">
-          <img src="img/2.JPG" data-title="My title" data-description="my description">
-          <img src="img/3.JPG" data-title="My title" data-description="my description">
+        <div id="lightgallery1"> 
+          <a href="img/1.jpg">
+            <img class="thumbnail" src="img/1.jpg" 
+              data-title="My title" 
+              data-description="my description">
+          </a>
+          <a href="img/2.jpg">
+            <img class="thumbnail" src="img/2.jpg" 
+              data-title="My title" 
+              data-description="my description">
+          </a>
+          <a href="img/3.jpg">
+            <img class="thumbnail" src="img/3.jpg" 
+              data-title="My title" 
+              data-description="my description">
+          </a>
+          <a href="img/4.jpg">
+            <img class="thumbnail" src="img/4.jpg" data-title="My title" 
+              data-description="my description">
+          </a>
+          <a href="img/5.jpg">
+            <img class="thumbnail" src="img/5.jpg" data-title="My title" 
+              data-description="my description">
+          </a>
+          <a href="img/6.jpg">
+            <img class="thumbnail" src="img/6.jpg" data-title="My title" 
+              data-description="my description">
+          </a>
         </div>
       </div>
       <div class="col-sm-2">
@@ -65,18 +101,22 @@
     <br>
     <div class="row">
       <div class="col-sm-4" width="380" height="214">
-        <div class="galleria">
-          <img src="img/4.JPG" data-title="My title" data-description="my description">
-          <img src="img/5.JPG" data-title="My title" data-description="my description">
-          <img src="img/6.JPG" data-title="My title" data-description="my description">
+        <div id="lightgallery2"> 
+          <a href="img/4.jpg">
+            <img class="thumbnail" src="img/4.jpg" data-title="My title" 
+              data-description="my description">
+          </a>
+          <a href="img/5.jpg">
+            <img class="thumbnail" src="img/5.jpg" data-title="My title" 
+              data-description="my description">
+          </a>
+          <a href="img/6.jpg">
+            <img class="thumbnail" src="img/6.jpg" data-title="My title" 
+              data-description="my description">
+          </a>
         </div>
       </div>
-      <div class="col-sm-4" width="380" height="214">
-        <div class="galleria">
-          <img src="img/7.JPG" data-title="My title" data-description="my description">
-          <img src="img/8.JPG" data-title="My title" data-description="my description">
-          <img src="img/9.JPG" data-title="My title" data-description="my description">
-        </div>
+      <div class="col-sm-4">
       </div>
       <div class="col-sm-4">
       </div>
