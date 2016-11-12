@@ -13,6 +13,9 @@
   <link rel="stylesheet" href="css/lightgallery.css">
   <link rel="stylesheet" href="css/lg-transitions.css">
   <link rel="stylesheet" href="css/sedonamuseumkiosk.css">
+  <link rel="stylesheet" href="css/lightslider.min.css">
+  <link rel="stylesheet" href="http://vjs.zencdn.net/5.8/video-js.min.css" >
+
 
   <style>
       .galleria-thumbnails-container{ height: 0px;
@@ -26,32 +29,89 @@
   <script src="js/lightgallery-all.min.js"></script>
   <script src="js/lg-thumbnail.js"></script>
   <script src="js/lg-video.min.js"></script>
+  <script src="https://vjs.zencdn.net/5.8/video.min.js"></script>
+  <script src="js/lightslider.min.js"></script>
+  <script src="js/ics.js"></script>
+
 
   <script>
     $(document).ready(function() {
-      var imgPerRow = 4;
-      var galleryWidth = $("#lightgallery1").width();
-      var photoWidth = (galleryWidth / imgPerRow) - 5;
-      $("#lightgallery1 img.thumbnail").css("width", photoWidth);
-      $("#lightgallery1 img.thumbnail").css("height", photoWidth*2/3);
-      $("#lightgallery1").lightGallery({
-        thumbnail: true,
-        thumbnailWidth: photoWidth,
-        loadYoutubeThumbnail: true
+      $("#lightgallery1").lightSlider({
+        gallery: false,
+        item: 1,
+        adaptiveHeight: true,
+        slideMargin:0,
+        onSliderLoad: function(el) {
+          el.lightGallery({
+            gallery: false,
+            pause: 1000,
+            auto: true,
+            item: 1,
+            loop: true,
+            enableDrag: false,
+            currentPagerPosition: 'left',
+            onSliderLoad: function(el) {
+              el.lightGallery({
+                selector: '#lightgallery1.lslide',
+                videojs: true
+              });
+            }
+          });
+        }
       });
 
-      imgPerRow = 2;
-      galleryWidth = $("#lightgallery2").width();
-      photoWidth = (galleryWidth / imgPerRow) - 5;
-      $("#lightgallery2 img.thumbnail").css("width", photoWidth);
-      $("#lightgallery2 img.thumbnail").css("height", photoWidth*2/3);
-      $("#lightgallery2").lightGallery({
-        thumbnail: true 
+      $("#lightgallery2").lightSlider({
+        gallery: false,
+        item: 1,
+        adaptiveHeight: true,
+        slideMargin:0,
+        onSliderLoad: function(el) {
+          el.lightGallery({
+            gallery: false,
+            pause: 1000,
+            auto: true,
+            item: 1,
+            loop: true,
+            enableDrag: false,
+            currentPagerPosition: 'left',
+            onSliderLoad: function(el) {
+              el.lightGallery({
+                selector: '#lightgallery1.lslide',
+                videojs: true
+              });
+            }
+          });
+        }
       });
-      $('#video-thumbnails').lightGallery({
-        loadYoutubeThumbnail: true,
-        youtubeThumbSize: 200
+
+      $("#lightgallery3").lightSlider({
+        gallery: false,
+        item: 1,
+        adaptiveHeight: true,
+        slideMargin:0,
+        onSliderLoad: function(el) {
+          el.lightGallery({
+            gallery: false,
+            pause: 1000,
+            auto: true,
+            item: 1,
+            loop: true,
+            enableDrag: false,
+            currentPagerPosition: 'left',
+            onSliderLoad: function(el) {
+              el.lightGallery({
+                selector: '#lightgallery1.lslide',
+                videojs: true
+              });
+            }
+          });
+        }
       });
+
+      var cal = ics(); 
+      cal.download("calendar.ics");
+      console.log(cal);
+
     });
 
   </script>
@@ -65,34 +125,37 @@
       <div class="col-sm-2">
       </div>
       <div class="col-sm-8">
-        <div id="lightgallery1"> 
-          <a href="img/1.jpg">
-            <img class="thumbnail" src="img/1.jpg" 
-              data-title="My title" 
-              data-description="my description">
-          </a>
-          <a href="img/2.jpg">
-            <img class="thumbnail" src="img/2.jpg" 
-              data-title="My title" 
-              data-description="my description">
-          </a>
-          <a href="img/3.jpg">
-            <img class="thumbnail" src="img/3.jpg" 
-              data-title="My title" 
-              data-description="my description">
-          </a>
-          <a href="img/4.jpg">
-            <img class="thumbnail" src="img/4.jpg" data-title="My title" 
-              data-description="my description">
-          </a>
-          <a href="img/5.jpg">
-            <img class="thumbnail" src="img/5.jpg" data-title="My title" 
-              data-description="my description">
-          </a>
-          <a href="img/6.jpg">
-            <img class="thumbnail" src="img/6.jpg" data-title="My title" 
-              data-description="my description">
-          </a>
+
+        <ul id="lightgallery1">
+          <li data-thumb="img/1.jpg" data-src="img/1.jpg">
+            <img class="autosize" src="img/1.jpg" />
+          </li>
+          <li data-thumb="img/2.jpg" data-src="img/2.jpg">
+            <img class="autosize" src="img/2.jpg" /> 
+          </li>
+          <li data-thumb="img/3.jpg" data-src="img/3.jpg">
+            <img class="autosize" src="img/3.jpg" />
+          </li>
+          <li data-thumb="img/4.jpg" data-src="img/4.jpg">
+            <img class="autosize" src="img/4.jpg" />
+          </li>
+          <li data-thumb="img/5.jpg" data-src="img/5.jpg">
+            <img class="autosize" src="img/5.jpg" />
+          </li>
+          <li data-thumb="img/6.jpg" data-src="img/6.jpg">
+            <img class="autosize" src="img/6.jpg" />
+          </li>
+          <li data-poster="videos/thumbnails/telegraphOffice.jpg" 
+              data-sub-html="" data-html="#video1">
+            <img class="autosize" src="videos/thumbnails/telegraphOffice.jpg" />
+          </li>
+        </ul>
+        <!-- video details -->
+        <div style="display:none;" id="video1"> 
+          <video class="lg-video-object lg-html5 video-js vjs-default-skin" 
+            controls >
+            <source src="videos/telegraphOffice.mp4" type="video/mp4">
+          </video>
         </div>
       </div>
       <div class="col-sm-2">
@@ -101,22 +164,88 @@
     <br>
     <div class="row">
       <div class="col-sm-4" width="380" height="214">
-        <div id="lightgallery2"> 
-          <a href="img/4.jpg">
-            <img class="thumbnail" src="img/4.jpg" data-title="My title" 
-              data-description="my description">
-          </a>
-          <a href="img/5.jpg">
-            <img class="thumbnail" src="img/5.jpg" data-title="My title" 
-              data-description="my description">
-          </a>
-          <a href="img/6.jpg">
-            <img class="thumbnail" src="img/6.jpg" data-title="My title" 
-              data-description="my description">
-          </a>
+        <ul id="lightgallery2">
+          <li data-poster="videos/thumbnails/bobBradshaw.jpg" data-sub-html="" data-html="#video2">
+            <img class="autosize" src="videos/thumbnails/bobBradshaw.jpg" />
+          </li>
+          <li data-poster="videos/thumbnails/moviesInSedona.jpg" data-sub-html="" data-html="#video3">
+            <img class="autosize" src="videos/thumbnails/moviesInSedona.jpg" />
+          </li>
+          <li data-poster="videos/thumbnails/movingTheTelegraphOffice.jpg" 
+              data-sub-html="" data-html="#video4">
+            <img class="autosize" src="videos/thumbnails/movingTheTelegraphOffice.jpg" />
+          </li>
+          <li data-poster="videos/thumbnails/restorationTelegraphOffice.jpg" 
+              data-sub-html="" data-html="#video5">
+            <img class="autosize" src="videos/thumbnails/restorationTelegraphOffice.jpg" />
+          </li>
+          <li data-poster="videos/thumbnails/visitSedonaMuseum.jpg" data-sub-html="" data-html="#video6">
+            <img class="autosize" src="videos/thumbnails/visitSedonaMuseum.jpg" />
+          </li>
+        </ul>
+
+        <!-- video details -->
+
+        <div style="display:none;" id="video2"> 
+          <video class="lg-video-object lg-html5 video-js vjs-default-skin" 
+            controls >
+            <source src="videos/bobBradshaw.mp4" type="video/mp4">
+          </video>
         </div>
+        <div style="display:none;" id="video3"> 
+          <video class="lg-video-object lg-html5 video-js vjs-default-skin" 
+            controls >
+            <source src="videos/moviesInSedona.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div style="display:none;" id="video4"> 
+          <video class="lg-video-object lg-html5 video-js vjs-default-skin" 
+            controls >
+            <source src="videos/movingTheTelegraphOffice.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div style="display:none;" id="video5"> 
+          <video class="lg-video-object lg-html5 video-js vjs-default-skin" 
+            controls >
+            <source src="videos/restorationTelegraphOffice.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div style="display:none;" id="video6"> 
+          <video class="lg-video-object lg-html5 video-js vjs-default-skin" 
+            controls >
+            <source src="videos/visitSedonaMuseum.mp4" type="video/mp4">
+          </video>
+        </div>
+
       </div>
       <div class="col-sm-4">
+        <ul id="lightgallery3">
+          <li data-thumb="img/sponsors/eliteproperties.jpg" 
+              data-src="img/sponsors/eliteproperties.jpg">
+            <img class="autosize" src="img/sponsors/eliteproperties.jpg" />
+          </li>
+          <li data-thumb="img/sponsors/gatewaycottage.jpg" 
+              data-src="img/sponsors/gatewaycottage.jpg">
+            <img class="autosize" src="img/sponsors/gatewaycottage.jpg" />
+          </li>
+          <li data-thumb="img/sponsors/redrocknews.jpg" 
+              data-src="img/sponsors/redrocknews.jpg">
+            <img class="autosize" src="img/sponsors/redrocknews.jpg" />
+          </li>
+          <li data-thumb="img/sponsors/redrocktv.jpg" 
+              data-src="img/sponsors/redrocktv.jpg">
+            <img class="autosize" src="img/sponsors/redrocktv.jpg" />
+          </li>
+          <li data-thumb="img/sponsors/speedconnect.jpg" 
+              data-src="img/sponsors/speedconnect.jpg">
+            <img class="autosize" src="img/sponsors/speedconnect.jpg" />
+          </li>
+          <li data-thumb="img/sponsors/weberiga.jpg" 
+              data-src="img/sponsors/weberiga.jpg">
+            <img class="autosize" src="img/sponsors/weberiga.jpg" />
+          </li>
+        </ul>
+        </ul>
       </div>
       <div class="col-sm-4">
       </div>
